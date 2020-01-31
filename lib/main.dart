@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/theme.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,6 +44,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
@@ -56,6 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+
+  
+
+  //TextColor textColor = new TextColor();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -115,10 +124,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
             new Container(
+              margin: const EdgeInsets.only(top: 52.0),
               child: new Image.asset(
                 'assets/images/logo-big.png',
                 height: 60.0,
                 fit: BoxFit.cover,
+              ),
+            ),
+
+            new Container(
+              margin: const EdgeInsets.only(top: 32.0),
+              child: new Text(
+                'Вход в личный кабинет',
+                style: TextStyle(
+                  fontFamily: 'ProximaNova',  
+                  fontWeight: FontWeight.bold,  
+                  fontSize: 22.0,  
+                  color: TextColor.black),
               ),
             ),
 
