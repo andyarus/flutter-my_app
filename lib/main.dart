@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/theme.dart';
+import 'package:my_app/theme/text_color.dart';
+import 'package:my_app/theme/app_color.dart';
 
 void main() => runApp(MyApp());
 
@@ -44,28 +45,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  
-
-  //TextColor textColor = new TextColor();
-
-
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -82,13 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //   title: Text(widget.title),
       // ),
 
-
-      backgroundColor: Color(0xFFEEF7FF),
-
-
-      //body: Image.asset('assets/images/logo-big.png'), //   <-- image
-
-
+      backgroundColor: AppColor.background,
 
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -110,20 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
 
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //mainAxisAlignment: MainAxisAlignment.center,
-
-
-
-
+          crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
-
-
-
-
-
-
             new Container(
+              alignment: Alignment.center,
               margin: const EdgeInsets.only(top: 52.0),
               child: new Image.asset(
                 'assets/images/logo-big.png',
@@ -133,46 +98,51 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             new Container(
+              alignment: Alignment.center,
               margin: const EdgeInsets.only(top: 32.0),
               child: new Text(
                 'Вход в личный кабинет',
                 style: TextStyle(
-                  fontFamily: 'ProximaNova',  
+                  fontFamily: 'ProximaNova',
                   fontWeight: FontWeight.bold,  
                   fontSize: 22.0,  
                   color: TextColor.black),
               ),
             ),
 
-
-            Text(
-              'Логин'
-            ),
-
-            TextField(
-              decoration: InputDecoration(
-                //border: InputBorder.none,
-                hintText: 'Введите логин'
+            new Container(
+              margin: const EdgeInsets.only(left: 20, top: 24.0, right: 20),
+              child: new Text(                
+                'Логин',
+                style: TextStyle(
+                  fontFamily: 'ProximaNova-Semibold',
+                  fontSize: 14.0,  
+                  color: TextColor.gray),
               ),
             ),
-
-
-            Text(
-              'Пароль'
+            
+            new Container(
+              margin: const EdgeInsets.only(left: 20, top: 8, right: 20),
+              child: new TextField(              
+                decoration: InputDecoration(
+                  hintText: 'Введите логин'
+                ),
+              )
             ),
 
-
-            TextField(
-              decoration: InputDecoration(
-                //border: InputBorder.none,
-                hintText: 'Введите пароль'
+            new Container(
+              child: new Text(
+                'Пароль'
               ),
             ),
-
-
-
-
-
+            
+            new Container(
+              child: new TextField(
+                decoration: InputDecoration(
+                  hintText: 'Введите пароль'
+                ),
+              ),
+            ),
 
             new CheckboxListTile(
                 value: true,
@@ -184,89 +154,52 @@ class _MyHomePageState extends State<MyHomePage> {
                 activeColor: Colors.red,
             ),
 
-
-
-
-            FlatButton(
-              textColor: Colors.blue,
-              onPressed: () {
-                print('RemindPassword button pressed');
-              },
-              child: Text(
-                "Напомнить пароль?",
-              ),
-            ),
-            
-
-
-
-
-
-
-
-
-
-            RaisedButton(
-              color: Color(0xFF009BF3),
-              textColor: Colors.white,
-              onPressed: () {},
-              child: const Text(
-                'Войти',
-                style: TextStyle(fontSize: 20)
+            new Container(
+              child: new FlatButton(
+                textColor: Colors.blue,
+                onPressed: () {
+                  print('RemindPassword button pressed');
+                },
+                child: Text(
+                  "Напомнить пароль?",
+                ),
               ),
             ),
 
-
-            RaisedButton(
-              color: Colors.white,
-              textColor: Colors.blue,
-              onPressed: () {},
-              child: const Text(
-                'Я не абонент',
-                style: TextStyle(fontSize: 20)
+            new Container(
+              child: new RaisedButton(
+                color: Color(0xFF009BF3),
+                textColor: Colors.white,
+                onPressed: () {},
+                child: const Text(
+                  'Войти',
+                  style: TextStyle(fontSize: 20)
+                ),
               ),
             ),
 
-
-
-
-            // Text(
-            //   'You have pushed the button this many times:',
-            // ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.display1,
-            // ),
-
-
-
-
+            new Container(
+              child: RaisedButton(
+                color: Colors.white,
+                textColor: Colors.blue,
+                onPressed: () {},
+                child: const Text(
+                  'Я не абонент',
+                  style: TextStyle(fontSize: 20)
+                ),
+              ),
+            ),
 
           ],
 
-
-
-
-
-
         ),
       ),
-
-
-
-
-
 
       // floatingActionButton: FloatingActionButton(
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',
       //   child: Icon(Icons.add),
       // ), // This trailing comma makes auto-formatting nicer for build methods.
-
-
-
-
-      
 
     );
   }
