@@ -58,15 +58,15 @@ flutter:
         - asset: assets/fonts/ProximaNova-Bold.ttf
           weight: 700
     
-    - family: ProximaNova-Regular
-      fonts:
-        - asset: assets/fonts/ProximaNova-Regular.ttf
-    - family: ProximaNova-Semibold
-      fonts:
-        - asset: assets/fonts/ProximaNova-Semibold.ttf
-    - family: ProximaNova-Bold
-      fonts:
-        - asset: assets/fonts/ProximaNova-Bold.ttf
+    # - family: ProximaNova-Regular
+    #   fonts:
+    #     - asset: assets/fonts/ProximaNova-Regular.ttf
+    # - family: ProximaNova-Semibold
+    #   fonts:
+    #     - asset: assets/fonts/ProximaNova-Semibold.ttf
+    # - family: ProximaNova-Bold
+    #   fonts:
+    #     - asset: assets/fonts/ProximaNova-Bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

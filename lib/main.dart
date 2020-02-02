@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/theme/text_color.dart';
 import 'package:my_app/theme/app_color.dart';
+import 'package:my_app/theme/textfield_color.dart';
+import 'package:my_app/theme/font_weight_e.dart';
 
 void main() => runApp(MyApp());
 
@@ -104,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 'Вход в личный кабинет',
                 style: TextStyle(
                   fontFamily: 'ProximaNova',
-                  fontWeight: FontWeight.bold,  
+                  fontWeight: FontWeightE.bold,
                   fontSize: 22.0,  
                   color: TextColor.black),
               ),
@@ -115,17 +117,47 @@ class _MyHomePageState extends State<MyHomePage> {
               child: new Text(                
                 'Логин',
                 style: TextStyle(
-                  fontFamily: 'ProximaNova-Semibold',
-                  fontSize: 14.0,  
+                  fontFamily: 'ProximaNova',
+                  fontWeight: FontWeightE.semiBold,
+                  fontSize: 14.0,
                   color: TextColor.gray),
               ),
             ),
             
+
+
+          // new TextField(
+          //   textAlign: TextAlign.left,
+          //   decoration: new InputDecoration(hintText: "Enter Something", contentPadding: const EdgeInsets.all(20.0)
+          // )
+
             new Container(
               margin: const EdgeInsets.only(left: 20, top: 8, right: 20),
               child: new TextField(              
                 decoration: InputDecoration(
-                  hintText: 'Введите логин'
+                  contentPadding: const EdgeInsets.only(left: 16),
+                  hintText: 'Введите логин',
+                  hintStyle: TextStyle(
+                    fontFamily: 'ProximaNova',
+                    fontWeight: FontWeightE.normal,
+                    fontSize: 22.0,
+                    color: TextColor.gray),
+
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1.0,
+                      color: TextFieldColor.border,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(4.0),
+                    ),
+                  ),
+
+                  //focusedBorder: ,
+                  //border: ,
+
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
               )
             ),
