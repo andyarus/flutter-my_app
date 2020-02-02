@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:my_app/theme/text_color.dart';
 import 'package:my_app/theme/app_color.dart';
 import 'package:my_app/theme/textfield_color.dart';
@@ -11,6 +13,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    // Setup device orientation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      //DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
