@@ -3,6 +3,7 @@ import 'package:my_app/theme/text_color.dart';
 import 'package:my_app/theme/app_color.dart';
 import 'package:my_app/theme/textfield_color.dart';
 import 'package:my_app/theme/font_weight_e.dart';
+import 'package:my_app/util/app.dart';
 
 void main() => runApp(MyApp());
 
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
 
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
@@ -108,7 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontFamily: 'ProximaNova',
                   fontWeight: FontWeightE.bold,
                   fontSize: 22.0,  
-                  color: TextColor.black),
+                  color: TextColor.black
+                ),
               ),
             ),
 
@@ -120,7 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontFamily: 'ProximaNova',
                   fontWeight: FontWeightE.semiBold,
                   fontSize: 14.0,
-                  color: TextColor.gray),
+                  color: TextColor.gray
+                ),
               ),
             ),
             
@@ -133,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             new Container(
               margin: const EdgeInsets.only(left: 20, top: 8, right: 20),
-              child: new TextField(              
+              child: new TextField(
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: 16),
                   hintText: 'Введите логин',
@@ -163,61 +166,156 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             new Container(
-              child: new Text(
-                'Пароль'
+              margin: const EdgeInsets.only(left: 20, top: 24.0, right: 20),
+              child: new Text(     
+                'Пароль',
+                style: TextStyle(
+                  fontFamily: 'ProximaNova',
+                  fontWeight: FontWeightE.semiBold,
+                  fontSize: 14.0,
+                  color: TextColor.gray
+                ),
               ),
             ),
             
             new Container(
-              child: new TextField(
+              margin: const EdgeInsets.only(left: 20, top: 8, right: 20),
+              child: new TextField(              
                 decoration: InputDecoration(
-                  hintText: 'Введите пароль'
-                ),
-              ),
-            ),
+                  contentPadding: const EdgeInsets.only(left: 16),
+                  hintText: 'Введите пароль',
+                  hintStyle: TextStyle(
+                    fontFamily: 'ProximaNova',
+                    fontWeight: FontWeightE.normal,
+                    fontSize: 22.0,
+                    color: TextColor.gray
+                  ),
 
-            new CheckboxListTile(
-                value: true,
-                onChanged: null,
-                title: new Text('Запомнить меня'),
-                controlAffinity: ListTileControlAffinity.leading,
-                //subtitle: new Text('Subtitle'),
-                //secondary: new Icon(Icons.archive),
-                activeColor: Colors.red,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1.0,
+                      color: TextFieldColor.border,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(4.0),
+                    ),
+                  ),
+
+                  //focusedBorder: ,
+                  //border: ,
+
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              )
             ),
 
             new Container(
-              child: new FlatButton(
-                textColor: Colors.blue,
-                onPressed: () {
-                  print('RemindPassword button pressed');
-                },
-                child: Text(
-                  "Напомнить пароль?",
-                ),
+              margin: const EdgeInsets.only(left: 0, top: 25, right: 0),
+              child: new Row(                
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  // new Container(
+                  //   margin: const EdgeInsets.only(left: 10, top: 0, right: 0),
+                  //   alignment: Alignment.centerLeft,
+                  //   // child: new CheckboxListTile(
+                  //   //     value: true,
+                  //   //     onChanged: null,
+                  //   //     title: new Text('Запомнить меня'),
+                  //   //     //controlAffinity: ListTileControlAffinity.leading,
+                  //   //     //subtitle: new Text('Subtitle'),
+                  //   //     //secondary: new Icon(Icons.archive),
+                  //   //     activeColor: Colors.red,
+                  //   // ),
+                  //   child: new Checkbox(
+                  //     value: false,
+                  //     onChanged: (bool newValue) {
+                  //       //do stuff
+                  //     },
+                  //   ),
+                  // ),
+                  // new Container(
+                  //   //margin: const EdgeInsets.only(left: 0, top: 0, right: 0),
+                  //   //alignment: Alignment.centerLeft,
+                  //   child: new Text(
+                  //     'Запомнить меня',
+                  //     style: TextStyle(
+                  //       fontFamily: 'ProximaNova',
+                  //       fontWeight: FontWeightE.semiBold,
+                  //       fontSize: 16.0,
+                  //       color: TextColor.black
+                  //     ),
+                  //   ),
+                  // ),
+
+                  new Expanded(
+                    child: new Container(
+                      //margin: const EdgeInsets.only(left: 0, top: 0, right: 0),
+                      alignment: Alignment.centerRight,
+                      child: new FlatButton(
+                        textColor: Colors.blue,
+                        onPressed: () {
+                          print('RemindPassword button pressed');
+                        },
+                        child: Text(
+                          "Напомнить пароль?",
+                          style: TextStyle(
+                            fontFamily: 'ProximaNova',
+                            fontWeight: FontWeightE.semiBold,
+                            fontSize: 16.0,
+                            color: TextColor.blue
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+
+                ]
               ),
             ),
 
             new Container(
+              margin: const EdgeInsets.only(left: 20, top: 40, right: 20),
+              width: App.size(context).width,
+              height: 56,              
               child: new RaisedButton(
-                color: Color(0xFF009BF3),
+                color: AppColor.blue,
                 textColor: Colors.white,
-                onPressed: () {},
-                child: const Text(
+                onPressed: () {
+                  print('signin clicked');
+                },
+                child: new Text(
                   'Войти',
-                  style: TextStyle(fontSize: 20)
+                  style: TextStyle(
+                    fontFamily: 'ProximaNova',
+                    fontWeight: FontWeightE.semiBold,
+                    fontSize: 16.0,
+                    color: TextColor.white
+                  ),
                 ),
               ),
             ),
 
             new Container(
+              margin: const EdgeInsets.only(left: 20, top: 16, right: 20),
+              width: App.size(context).width,
+              height: 56,              
               child: RaisedButton(
                 color: Colors.white,
                 textColor: Colors.blue,
-                onPressed: () {},
-                child: const Text(
+                onPressed: () {
+                  print('notuser clicked');
+                },
+                child: new Text(
                   'Я не абонент',
-                  style: TextStyle(fontSize: 20)
+                  style: TextStyle(
+                    fontFamily: 'ProximaNova',
+                    fontWeight: FontWeightE.semiBold,
+                    fontSize: 16.0,
+                    color: TextColor.blue
+                  ),
                 ),
               ),
             ),
@@ -226,12 +324,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
         ),
       ),
-
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
 
     );
   }
