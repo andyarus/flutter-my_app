@@ -23,7 +23,16 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.green,
+
+        primarySwatch: Colors.blue,
+
+        // // for iOS
+        // cupertinoOverrideTheme: CupertinoThemeData(
+        //   primaryColor: Colors.red,
+        // ),
+        // // for others(Android, Fuchsia)
+        // cursorColor: Colors.red,
+
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -168,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     //focusedBorder: ,
-                    //border: ,
+                    border: InputBorder.none,
 
                     filled: true,
                     fillColor: Colors.white,
@@ -213,7 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     //focusedBorder: ,
-                    //border: ,
+                    border: InputBorder.none,
 
                     filled: true,
                     fillColor: Colors.white,
@@ -290,10 +299,11 @@ class _MyHomePageState extends State<MyHomePage> {
               new Container(
                 margin: const EdgeInsets.only(left: 20, top: 40, right: 20),
                 width: App.size(context).width,
-                height: 56,              
-                child: new RaisedButton(
+                height: 56,
+                child: new FlatButton(      
+                //child: new RaisedButton(
                   color: AppColor.blue,
-                  textColor: Colors.white,
+                  textColor: TextColor.white,
                   onPressed: () {
                     print('signin clicked');
                   },
@@ -312,10 +322,21 @@ class _MyHomePageState extends State<MyHomePage> {
               new Container(
                 margin: const EdgeInsets.only(left: 20, top: 16, right: 20),
                 width: App.size(context).width,
-                height: 56,              
-                child: RaisedButton(
+                height: 56,
+                child: new FlatButton(
+                //child: new OutlineButton(
+                //child: new RaisedButton(  
                   color: Colors.white,
-                  textColor: Colors.blue,
+                  textColor: TextColor.blue,
+
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: TextFieldColor.border, //Color of the border
+                      style: BorderStyle.solid, //Style of the border
+                      width: 1.0, //width of the border
+                    ),
+                  ),
+                  
                   onPressed: () {
                     print('notuser clicked');
                   },
