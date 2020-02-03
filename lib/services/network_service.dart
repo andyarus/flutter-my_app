@@ -1,13 +1,18 @@
 import 'package:http/http.dart' as http;
-//import 'dart:async';
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:my_app/models/user_auth.dart';
 
 class NetworkService {
 
   static Future<UserAuth> auth(String login, String password) async {
-    Map<String, String> headers = {"Content-type": "application/x-www-form-urlencoded"};
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
+      //HttpHeaders.authorizationHeader: "$token",
+      //"Content-type": "application/x-www-form-urlencoded"
+    };
 
     var data = "login=$login&password=$password";
     print('auth data:$data');
