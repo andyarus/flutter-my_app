@@ -277,6 +277,13 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     print('signin clicked');
                   },
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(4.0),
+                    ),
+                  ),
+
                   child: new Text(
                     'Войти',
                     style: TextStyle(
@@ -304,6 +311,9 @@ class _LoginPageState extends State<LoginPage> {
                       color: TextFieldColor.border, //Color of the border
                       style: BorderStyle.solid, //Style of the border
                       width: 1.0, //width of the border
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(4.0),
                     ),
                   ),
                   
