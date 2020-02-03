@@ -6,17 +6,11 @@ import 'package:my_app/theme/app_color.dart';
 import 'package:my_app/theme/textfield_color.dart';
 import 'package:my_app/theme/font_weight_e.dart';
 
+import 'package:my_app/models/user_auth.dart';
+import 'package:my_app/services/network_service.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -25,19 +19,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Future<UserAuth> post;
+  //Future<Post> post;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   post = fetchPost();
+  // }
+
+  final loginTextEditingController = TextEditingController();
+  final passwordTextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
 
     App.disableDeviceRotation();
-
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    
-    // return Scaffold(
     
     return GestureDetector(
       onTap: () {
@@ -46,11 +43,6 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: Scaffold(
         appBar: null,
-        // appBar: AppBar(
-        //   // Here we take the value from the MyHomePage object that was created by
-        //   // the App.build method, and use it to set our appbar title.
-        //   title: Text(widget.title),
-        // ),
 
         // Fix keyboard padding problem
         resizeToAvoidBottomInset: false,
@@ -58,24 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: AppColor.background,
 
         body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
           child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -116,17 +91,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              
-
-
-            // new TextField(
-            //   textAlign: TextAlign.left,
-            //   decoration: new InputDecoration(hintText: "Enter Something", contentPadding: const EdgeInsets.all(20.0)
-            // )
 
               new Container(
                 margin: const EdgeInsets.only(left: 20, top: 8, right: 20),
                 child: new TextField(
+                  controller: loginTextEditingController,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(left: 16),
                     hintText: 'Введите логин',
@@ -170,7 +139,8 @@ class _LoginPageState extends State<LoginPage> {
               
               new Container(
                 margin: const EdgeInsets.only(left: 20, top: 8, right: 20),
-                child: new TextField(              
+                child: new TextField(
+                  controller: passwordTextEditingController,      
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(left: 16),
                     hintText: 'Введите пароль',
@@ -275,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: AppColor.blue,
                   textColor: TextColor.white,
                   onPressed: () {
-                    print('signin clicked');
+                    _auth();
                   },
 
                   shape: RoundedRectangleBorder(
@@ -340,4 +310,82 @@ class _LoginPageState extends State<LoginPage> {
       )
     );
   }
+
+  void _auth() {
+    print('auth');
+    var login = loginTextEditingController.text;
+    var password = passwordTextEditingController.text;
+    
+    print('login:$login password:$password');
+
+    post = NetworkService.auth(login, password);
+    
+    _showDialog();
+  }
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: new Text("Alert Dialog title"),
+          content: _authResultContainer(),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Container _authResultContainer() {
+    return new Container(
+      margin: EdgeInsets.only(top: 10),
+      alignment: Alignment.center,
+      child: FutureBuilder<UserAuth>(
+        future: post,
+        builder: (context, snapshot) {
+          var hasData = snapshot.hasData;
+          var hasError = snapshot.hasError;
+
+          print('snapshot:$snapshot');                    
+          print('snapshot.hasData:$hasData');
+          print('snapshot.hasError:$hasError');
+          
+          if (hasData) {
+            var data = snapshot.data;
+            var token = snapshot.data.token;
+            var clientId = snapshot.data.clientId;
+
+            print('snapshot.data:$data');
+            print('snapshot.data.title:$token');
+            print('snapshot.data.clientId:$clientId');
+          }
+          if (hasError) {
+            var error = snapshot.error;
+
+            print('snapshot.error:$error');
+          }                  
+
+          if (snapshot.hasData) {
+            var clientId = snapshot.data.clientId;
+            var token = snapshot.data.token;
+            var result = "{\n\"client_id\": $clientId,\n\"token\": \"$token\"\n}";
+            return Text(result);
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+
+          // By default, show a loading spinner.
+          return CircularProgressIndicator();
+        },
+      ),
+    );
+  }
+
 }
